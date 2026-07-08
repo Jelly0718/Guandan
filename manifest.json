@@ -1,9 +1,9 @@
 {
-  "name": "Guandan Trump",
-  "short_name": "Guandan",
-  "start_url": "./index.html",
-  "display": "fullscreen",
-  "orientation": "landscape",
-  "background_color": "#111111",
-  "theme_color": "#111111"
+"name":"Guandan Trump",
+"short_name":"Guandan",
+"start_url":"./index.html",
+"display":"fullscreen",
+"orientation":"any",
+"background_color":"#111111",
+"theme_color":"#111111"
 }
