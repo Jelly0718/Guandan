@@ -1,4 +1,4 @@
-const cacheName = "guandan-v3";
+const cacheName = "guandan-v4";
 
 
 const files = [
