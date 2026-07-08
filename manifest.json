@@ -1,1 +1,9 @@
-
+{
+"name":"掼蛋级牌",
+"short_name":"级牌",
+"display":"fullscreen",
+"orientation":"landscape",
+"start_url":"index.html",
+"background_color":"#111111",
+"theme_color":"#111111"
+}
