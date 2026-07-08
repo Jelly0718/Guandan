@@ -5,9 +5,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title></title>
-
 <link rel="manifest" href="manifest.json">
+
+<title></title>
 
 <style>
 
@@ -17,6 +17,7 @@
     -webkit-user-select:none;
     -webkit-tap-highlight-color:transparent;
 }
+
 
 html, body {
 
@@ -33,14 +34,16 @@ html, body {
 }
 
 
-.container {
 
-    display:flex;
+.container {
 
     width:100vw;
     height:100vh;
 
+    display:flex;
+
 }
+
 
 
 .side {
@@ -56,6 +59,7 @@ html, body {
 }
 
 
+
 .side:first-child {
 
     border-right:2px solid #333;
@@ -64,15 +68,18 @@ html, body {
 
 
 
+
 .card {
 
-    background:white;
+    background:#fff;
 
-    width:min(35vw,300px);
+    width:min(30vw,280px);
 
-    height:min(65vh,400px);
+    height:min(82vh,560px);
 
-    border-radius:30px;
+
+    border-radius:28px;
+
 
     display:flex;
 
@@ -80,23 +87,40 @@ html, body {
 
     align-items:center;
 
-    padding-bottom:8%;
 
-    color:black;
+    color:#111;
 
-    font-size:clamp(90px,18vw,220px);
 
-    font-weight:800;
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+
+    font-size:clamp(100px,17vw,210px);
+
+
+    font-weight:600;
+
+
+    letter-spacing:-6px;
+
 
     box-shadow:
-    0 10px 25px rgba(0,0,0,.6);
+    0 12px 30px rgba(0,0,0,.55);
+
 
     transform-style:preserve-3d;
+
 
     transition:
     transform .18s ease;
 
 }
+
 
 
 .flip {
@@ -107,11 +131,23 @@ html, body {
 
 
 
+
+
+/* Landscape */
+
 @media (orientation:landscape){
+
 
     .container {
 
-        transform:translateY(-5vh);
+        transform:translateY(-8vh);
+
+    }
+
+
+    .card {
+
+        height:min(86vh,600px);
 
     }
 
@@ -119,14 +155,15 @@ html, body {
 
 
 
+
+/* Portrait */
+
 @media (orientation:portrait){
 
 
     .container {
 
         flex-direction:column;
-
-        transform:none;
 
     }
 
@@ -146,17 +183,18 @@ html, body {
 
         height:min(35vh,300px);
 
+
         font-size:clamp(80px,25vw,180px);
 
-        padding-bottom:5%;
-
     }
+
 
 }
 
 
 
 </style>
+
 
 </head>
 
@@ -166,29 +204,38 @@ html, body {
 
 <div class="container">
 
-    <div class="side">
 
-        <div class="card" id="left"></div>
+<div class="side">
 
-    </div>
-
-
-    <div class="side">
-
-        <div class="card" id="right"></div>
-
-    </div>
+<div class="card" id="left"></div>
 
 </div>
 
 
 
+<div class="side">
+
+<div class="card" id="right"></div>
+
+</div>
+
+
+</div>
+
+
+
+
 <script>
 
+
 const ranks = [
-    "2","3","4","5","6","7",
-    "8","9","10","J","Q","K","A"
+
+"2","3","4","5","6","7",
+
+"8","9","10","J","Q","K","A"
+
 ];
+
 
 
 let leftRank =
@@ -197,6 +244,7 @@ Number(localStorage.getItem("leftRank")) || 0;
 
 let rightRank =
 Number(localStorage.getItem("rightRank")) || 0;
+
 
 
 const left =
@@ -222,15 +270,18 @@ function animate(card){
 
 
 
+
 function update(){
 
     left.textContent =
     ranks[leftRank];
 
+
     right.textContent =
     ranks[rightRank];
 
 }
+
 
 
 
@@ -288,11 +339,11 @@ function nextRight(){
 
 left.addEventListener(
 "touchend",
-function(e){
+e=>{
 
-    e.preventDefault();
+e.preventDefault();
 
-    nextLeft();
+nextLeft();
 
 },
 {passive:false}
@@ -302,11 +353,11 @@ function(e){
 
 right.addEventListener(
 "touchend",
-function(e){
+e=>{
 
-    e.preventDefault();
+e.preventDefault();
 
-    nextRight();
+nextRight();
 
 },
 {passive:false}
@@ -326,9 +377,11 @@ update();
 
 if("serviceWorker" in navigator){
 
-    navigator.serviceWorker.register("sw.js");
+navigator.serviceWorker.register("sw.js");
 
 }
+
+
 
 </script>
 
