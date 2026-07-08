@@ -12,10 +12,10 @@
 <style>
 
 * {
-    box-sizing: border-box;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
+    box-sizing:border-box;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html, body {
@@ -28,7 +28,7 @@ html, body {
 
     overflow:hidden;
 
-    touch-action: manipulation;
+    touch-action:manipulation;
 
 }
 
@@ -68,25 +68,28 @@ html, body {
 
     background:white;
 
-    width:65%;
-    height:70%;
+    width:min(35vw,300px);
+
+    height:min(65vh,400px);
 
     border-radius:30px;
 
     display:flex;
 
     justify-content:center;
+
     align-items:center;
+
+    padding-bottom:8%;
 
     color:black;
 
-    font-size:clamp(90px,22vw,220px);
+    font-size:clamp(90px,18vw,220px);
 
     font-weight:800;
 
     box-shadow:
     0 10px 25px rgba(0,0,0,.6);
-
 
     transform-style:preserve-3d;
 
@@ -98,8 +101,19 @@ html, body {
 
 .flip {
 
-    transform:
-    rotateY(90deg);
+    transform:rotateY(90deg);
+
+}
+
+
+
+@media (orientation:landscape){
+
+    .container {
+
+        transform:translateY(-5vh);
+
+    }
 
 }
 
@@ -107,9 +121,12 @@ html, body {
 
 @media (orientation:portrait){
 
+
     .container {
 
         flex-direction:column;
+
+        transform:none;
 
     }
 
@@ -125,9 +142,13 @@ html, body {
 
     .card {
 
-        width:45%;
+        width:min(55vw,300px);
 
-        height:55%;
+        height:min(35vh,300px);
+
+        font-size:clamp(80px,25vw,180px);
+
+        padding-bottom:5%;
 
     }
 
@@ -137,7 +158,6 @@ html, body {
 
 </style>
 
-
 </head>
 
 
@@ -146,39 +166,29 @@ html, body {
 
 <div class="container">
 
+    <div class="side">
 
-<div class="side">
+        <div class="card" id="left"></div>
 
-<div class="card" id="left"></div>
-
-</div>
-
+    </div>
 
 
-<div class="side">
+    <div class="side">
 
-<div class="card" id="right"></div>
+        <div class="card" id="right"></div>
 
-</div>
-
-
+    </div>
 
 </div>
-
 
 
 
 <script>
 
-
 const ranks = [
-
-"2","3","4","5","6","7",
-
-"8","9","10","J","Q","K","A"
-
+    "2","3","4","5","6","7",
+    "8","9","10","J","Q","K","A"
 ];
-
 
 
 let leftRank =
@@ -187,7 +197,6 @@ Number(localStorage.getItem("leftRank")) || 0;
 
 let rightRank =
 Number(localStorage.getItem("rightRank")) || 0;
-
 
 
 const left =
@@ -203,7 +212,6 @@ function animate(card){
 
     card.classList.add("flip");
 
-
     setTimeout(()=>{
 
         card.classList.remove("flip");
@@ -214,12 +222,10 @@ function animate(card){
 
 
 
-
 function update(){
 
     left.textContent =
     ranks[leftRank];
-
 
     right.textContent =
     ranks[rightRank];
@@ -228,18 +234,16 @@ function update(){
 
 
 
-
 function nextLeft(){
 
     animate(left);
-
 
     setTimeout(()=>{
 
         leftRank++;
 
         if(leftRank >= ranks.length)
-        leftRank = 0;
+            leftRank = 0;
 
 
         localStorage.setItem(
@@ -250,11 +254,9 @@ function nextLeft(){
 
         update();
 
-
     },90);
 
 }
-
 
 
 
@@ -262,13 +264,12 @@ function nextRight(){
 
     animate(right);
 
-
     setTimeout(()=>{
 
         rightRank++;
 
         if(rightRank >= ranks.length)
-        rightRank = 0;
+            rightRank = 0;
 
 
         localStorage.setItem(
@@ -279,23 +280,19 @@ function nextRight(){
 
         update();
 
-
     },90);
 
 }
 
 
 
-
-// Faster touch controls
-
 left.addEventListener(
 "touchend",
 function(e){
 
-e.preventDefault();
+    e.preventDefault();
 
-nextLeft();
+    nextLeft();
 
 },
 {passive:false}
@@ -307,18 +304,15 @@ right.addEventListener(
 "touchend",
 function(e){
 
-e.preventDefault();
+    e.preventDefault();
 
-nextRight();
+    nextRight();
 
 },
 {passive:false}
 );
 
 
-
-
-// Desktop support
 
 left.onclick = nextLeft;
 
@@ -330,16 +324,11 @@ update();
 
 
 
-
-// PWA offline
-
 if("serviceWorker" in navigator){
 
-navigator.serviceWorker.register("sw.js");
+    navigator.serviceWorker.register("sw.js");
 
 }
-
-
 
 </script>
 
