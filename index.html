@@ -29,7 +29,9 @@ html, body {
 
     overflow:hidden;
 
-    touch-action:manipulation;
+    position:fixed;
+
+    touch-action:none;
 
 }
 
@@ -69,9 +71,10 @@ html, body {
 
 
 
+
 .card {
 
-    background:#fff;
+    background:white;
 
     width:min(30vw,280px);
 
@@ -119,7 +122,9 @@ html, body {
     transition:
     transform .18s ease;
 
+
 }
+
 
 
 
@@ -137,21 +142,16 @@ html, body {
 
 @media (orientation:landscape){
 
-
-    .container {
-
-        transform:translateY(-8vh);
-
-    }
-
-
     .card {
 
-        height:min(86vh,600px);
+        height:min(82vh,560px);
+
+        margin-bottom:3vh;
 
     }
 
 }
+
 
 
 
@@ -168,6 +168,7 @@ html, body {
     }
 
 
+
     .side:first-child {
 
         border-right:none;
@@ -177,14 +178,20 @@ html, body {
     }
 
 
+
     .card {
 
+
         width:min(55vw,300px);
+
 
         height:min(35vh,300px);
 
 
         font-size:clamp(80px,25vw,180px);
+
+
+        margin-bottom:0;
 
     }
 
@@ -193,8 +200,8 @@ html, body {
 
 
 
-</style>
 
+</style>
 
 </head>
 
@@ -221,6 +228,7 @@ html, body {
 
 
 </div>
+
 
 
 
@@ -256,9 +264,12 @@ document.getElementById("right");
 
 
 
+
+
 function animate(card){
 
     card.classList.add("flip");
+
 
     setTimeout(()=>{
 
@@ -285,16 +296,22 @@ function update(){
 
 
 
+
 function nextLeft(){
 
     animate(left);
 
+
     setTimeout(()=>{
+
 
         leftRank++;
 
+
         if(leftRank >= ranks.length)
+
             leftRank = 0;
+
 
 
         localStorage.setItem(
@@ -305,9 +322,12 @@ function nextLeft(){
 
         update();
 
+
     },90);
 
 }
+
+
 
 
 
@@ -315,12 +335,17 @@ function nextRight(){
 
     animate(right);
 
+
     setTimeout(()=>{
+
 
         rightRank++;
 
+
         if(rightRank >= ranks.length)
+
             rightRank = 0;
+
 
 
         localStorage.setItem(
@@ -331,37 +356,43 @@ function nextRight(){
 
         update();
 
+
     },90);
 
 }
 
 
 
+
+
+
 left.addEventListener(
 "touchend",
-e=>{
+function(e){
 
-e.preventDefault();
+    e.preventDefault();
 
-nextLeft();
+    nextLeft();
 
 },
 {passive:false}
 );
+
 
 
 
 right.addEventListener(
 "touchend",
-e=>{
+function(e){
 
-e.preventDefault();
+    e.preventDefault();
 
-nextRight();
+    nextRight();
 
 },
 {passive:false}
 );
+
 
 
 
@@ -371,13 +402,15 @@ right.onclick = nextRight;
 
 
 
+
 update();
+
 
 
 
 if("serviceWorker" in navigator){
 
-navigator.serviceWorker.register("sw.js");
+    navigator.serviceWorker.register("sw.js");
 
 }
 
